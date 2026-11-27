@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useState, useSyncExternalStore } from 'react';
 
 const storageKey = 'medishield.home.theme';
+const themeChanged = 'medishield-theme-changed';
 
 export type HomeTheme = 'system' | 'light' | 'dark';
 
@@ -8,26 +9,38 @@ export function isTheme(value: string | null): value is HomeTheme {
   return value === 'system' || value === 'light' || value === 'dark';
 }
 
-export function useHomeTheme() {
-  const [theme, setTheme] = useState<HomeTheme>('system');
+function readTheme(): HomeTheme {
+  try {
+    const saved = window.localStorage.getItem(storageKey);
+    if (isTheme(saved)) return saved;
+  } catch {
+    // Storage may be blocked by browser preferences.
+  }
+  return 'system';
+}
 
-  useEffect(() => {
-    try {
-      const saved = window.localStorage.getItem(storageKey);
-      if (isTheme(saved)) setTheme(saved);
-    } catch {
-      // The system theme still works when browser storage is disabled.
-    }
-  }, []);
+function subscribeToTheme(onChange: () => void) {
+  window.addEventListener('storage', onChange);
+  window.addEventListener(themeChanged, onChange);
+  return () => {
+    window.removeEventListener('storage', onChange);
+    window.removeEventListener(themeChanged, onChange);
+  };
+}
+
+export function useHomeTheme() {
+  const saved = useSyncExternalStore(subscribeToTheme, readTheme, () => 'system' as const);
+  const [temporaryTheme, setTemporaryTheme] = useState<HomeTheme>();
 
   function changeTheme(value: HomeTheme) {
-    setTheme(value);
     try {
       window.localStorage.setItem(storageKey, value);
+      setTemporaryTheme(undefined);
+      window.dispatchEvent(new Event(themeChanged));
     } catch {
-      // The preference still applies for this visit.
+      setTemporaryTheme(value);
     }
   }
 
-  return [theme, changeTheme] as const;
+  return [temporaryTheme ?? saved, changeTheme] as const;
 }
