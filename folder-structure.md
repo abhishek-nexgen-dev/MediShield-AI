@@ -17,12 +17,14 @@ The Expo starter lives in `apps/mobile` as the `@medishield/mobile` package. The
 │   │   │   ├── (main)/         Home and Explore tabs
 │   │   │   ├── login.tsx
 │   │   │   ├── forgot-password.tsx
-│   │   │   └── register-hospital.tsx
+│   │   │   ├── register-hospital.tsx
+│   │   │   └── patient/        Shared layout and patient portal routes
 │   │   ├── components/         Shared UI and platform variants
 │   │   ├── constants/          Theme tokens
 │   │   ├── features/
 │   │   │   ├── auth/          Shared account and hospital registration screens
-│   │   │   └── home/          Shared homepage content and platform components
+│   │   │   ├── home/          Shared homepage content and platform components
+│   │   │   └── patient/       Web portal, reusable components and synthetic fixtures
 │   │   ├── hooks/              Theme and color-scheme hooks
 │   │   └── global.css          Shared stylesheet
 │   ├── app.json                Expo and platform configuration

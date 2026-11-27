@@ -12,10 +12,6 @@ export const homeActions = {
     description: 'Use the project repository for general questions and collaboration. Keep patient information, records, and credentials out of public messages.',
     link: { label: 'Visit the project repository', href: repository },
   },
-  'patient-portal': {
-    title: 'Patient portal',
-    description: 'The planned portal will let verified patients view released records and manage authorized sharing. Portal access will become available in a later milestone.',
-  },
   privacy: {
     title: 'Privacy information',
     description: 'This homepage stores your theme preference in your browser. The dashboard uses fictional data. Read the security guide for the project’s planned access and privacy controls.',

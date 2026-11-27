@@ -45,6 +45,26 @@ The Expo workspace pins NativeWind 4.2.7 and Tailwind CSS 3.4.17. Metro reads th
 
 The [NativeWind compatibility patch](patches/react-native-css-interop@0.2.7.patch) removes the automatic registration of React Native's deprecated `ImageBackground`. Run `node --test apps/mobile/tests/nativewind-interop.test.cjs` from the root to verify the remaining image and view registrations. Restart Expo with `pnpm web --clear` after changing Tailwind, Babel, or Metro configuration.
 
+## Patient portal demo
+
+Open **Patient Portal** in the web homepage footer, or browse to `/patient/dashboard`. The sidebar links to Medical Records, Medications, and Discharge Summaries. Select **Open synthetic demo** to start. The demo uses fictional records, sample PDF files and a per-tab session preference. Logging out closes the demo session.
+
+Medications are grouped by hospital. The hospital eye icon opens all prescriptions for that hospital, and the eye icon on a prescription opens its details. Each view generates a QR code locally. The code contains the URL for that synthetic demo view. A new browser still shows the demo access gate. To scan from a phone during development, open the portal using the Expo server’s LAN address before displaying the QR code.
+
+The patient authentication and records services are pending. The portal does not fetch real patient data. Upload and sharing previews demonstrate the forms and keep submission disabled. The fixture PDFs contain no patient identifiers or clinical results.
+
+Run the regression checks from the repository root with Node.js 24.
+
+```sh
+node --test apps/mobile/tests/*.test.cjs
+pnpm --filter @medishield/mobile exec tsc --noEmit
+pnpm --filter @medishield/mobile exec expo export --platform web
+```
+
+The patient tests check combined filters, date boundaries, sorting, pagination, document fixtures, offline failures and cancellation. For a browser smoke test, open the portal in a fresh tab, verify the access gate, enter the demo, and switch between Dashboard and Medical Records. Try the chart ranges, record search, a sample PDF, filter reset and both workflow previews. Repeat navigation at mobile width and switch the portal between light and dark. Log out and confirm a direct visit to Medical Records displays the access gate.
+
+The portal passed Chromium smoke checks at desktop and mobile widths, including access gating, offline and error recovery, sidebar navigation, theme persistence, record filtering, pagination, PDF preview, upload file validation, and the sharing preview. The app passed ESLint using the Expo SDK configuration, TypeScript, Node tests, and production web export. Server-rendering checks covered both portal routes and the existing public routes.
+
 ## Verification baseline
 
 The workspace migration was checked with Node.js 24.18.0 and pnpm 11.13.0.

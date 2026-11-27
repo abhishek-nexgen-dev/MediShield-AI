@@ -21,7 +21,7 @@ const footerGroups: { title: string; links: FooterLink[] }[] = [
       { label: 'Features', href: '#features' },
       { label: 'How It Works', href: '#how-it-works' },
       { label: 'For Hospitals', href: '#hospitals' },
-      { label: 'Patient Portal', action: 'patient-portal' },
+      { label: 'Patient Portal', href: '/patient/dashboard' },
     ],
   },
   {
