@@ -13,12 +13,16 @@ The Expo starter lives in `apps/mobile` as the `@medishield/mobile` package. The
 │   ├── scripts/                Starter reset utility
 │   ├── src/
 │   │   ├── app/
-│   │   │   ├── _layout.tsx     Root layout, theme, and platform tabs
-│   │   │   ├── index.tsx       Home route
-│   │   │   └── explore.tsx     Explore route
+│   │   │   ├── _layout.tsx     Root stack and theme
+│   │   │   ├── (main)/         Home and Explore tabs
+│   │   │   ├── login.tsx
+│   │   │   ├── forgot-password.tsx
+│   │   │   └── register-hospital.tsx
 │   │   ├── components/         Shared UI and platform variants
 │   │   ├── constants/          Theme tokens
-│   │   ├── features/          Workflow modules
+│   │   ├── features/
+│   │   │   ├── auth/          Shared account and hospital registration screens
+│   │   │   └── home/          Shared homepage content and platform components
 │   │   ├── hooks/              Theme and color-scheme hooks
 │   │   └── global.css          Shared stylesheet
 │   ├── app.json                Expo and platform configuration
@@ -29,7 +33,7 @@ The Expo starter lives in `apps/mobile` as the `@medishield/mobile` package. The
 └── pnpm-workspace.yaml         Workspace package selection and settings
 ```
 
-Keep route entry points and navigation in [`apps/mobile/src/app`](apps/mobile/src/app) and [`apps/web/src/routes`](apps/web/src/routes). Put workflow views, hooks, and feature-specific components in the relevant `features/` directory. Put UI shared across mobile features in [`apps/mobile/src/components`](apps/mobile/src/components). The [root layout](apps/mobile/src/app/_layout.tsx) loads a platform-specific tab component where available.
+Keep route entry points and navigation in [`apps/mobile/src/app`](apps/mobile/src/app) and [`apps/web/src/routes`](apps/web/src/routes). Put workflow views, hooks, and feature-specific components in the relevant `features/` directory. Put UI shared across mobile features in [`apps/mobile/src/components`](apps/mobile/src/components). The [root layout](apps/mobile/src/app/_layout.tsx) hosts the account routes and the main tab group.
 
 ## Planned data flow
 

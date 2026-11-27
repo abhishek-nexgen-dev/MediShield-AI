@@ -2,7 +2,6 @@ import { Image } from 'expo-image';
 import { StyleSheet, View } from 'react-native';
 import Animated, { Keyframe, Easing } from 'react-native-reanimated';
 
-import classes from './animated-icon.module.css';
 const DURATION = 300;
 
 export function AnimatedSplashOverlay() {
@@ -62,7 +61,7 @@ export function AnimatedIcon() {
       </Animated.View>
 
       <Animated.View style={styles.background} entering={keyframe.duration(DURATION)}>
-        <div className={classes.expoLogoBackground} />
+        <div className="h-32 w-32 rounded-[40px] bg-gradient-to-b from-[#3c9ffe] to-[#0274df]" />
       </Animated.View>
 
       <Animated.View style={styles.imageContainer} entering={logoKeyframe.duration(DURATION)}>

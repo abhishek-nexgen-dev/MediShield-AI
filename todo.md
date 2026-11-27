@@ -9,7 +9,8 @@ Checked items reflect the current repository. Close each remaining item with a r
 - [x] Bootstrap Expo Router and TypeScript with Home and Explore routes.
 - [x] Move the Expo starter into `apps/mobile`, share the pnpm lockfile at the root, and scaffold feature directories for mobile, web, and the API.
 - [x] Verify workspace installation, Home and Explore HTTP responses, web export, and native configuration loading. See the [verification baseline](setup.md#verification-baseline).
-- [ ] Fix the starter [web tab ref mismatch](apps/mobile/src/components/app-tabs.web.tsx#L38). Add CI for frozen installation, type checking, lint, and web export.
+- [x] Build the public homepage and resolve the starter web tab ref mismatch.
+- [ ] Add CI for frozen installation, type checking, lint, and web export.
 - [ ] Choose the browser stack and define initial API contracts, organization and encounter scopes, audit events, database migrations, and seed data.
 
 ## Prototype synthetic workflows

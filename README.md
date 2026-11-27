@@ -415,8 +415,21 @@ Competing reservations receive a `409 Conflict`. Invalid scans are rejected; una
 
 ## Getting Started
 
+### Run the public homepage
+
+From the repository root, use Node.js 24.3 or newer in the 24.x line and pnpm 11.13.0.
+
+```sh
+pnpm install --frozen-lockfile
+pnpm web
+```
+
+Open the URL printed by Expo, or launch the Android or iOS app and select **Home**. The MediShield AI homepage introduces the project and shows a synthetic ward dashboard. The Log In, Forgot Password, and Register Hospital pages show the planned workflows and validate sample input locally. The existing Explore screen is available in the native tabs and at `/explore` on web. See [local setup](setup.md) for verification commands.
+
+### Planned full-platform setup
+
 > [!NOTE]
-> The commands below are the planned development setup from V2. They will work only after the team creates the workspace scripts, Docker services, migrations and configuration files. The actual repository has not been inspected. Pin supported dependency versions in the lockfiles.
+> The commands in this section describe the planned V2 setup and depend on future workspace scripts, Docker services, migrations and configuration files.
 
 ### Prerequisites
 
