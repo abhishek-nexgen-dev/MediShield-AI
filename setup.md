@@ -2,7 +2,7 @@
 
 [README](README.md) · [Architecture](folder-structure.md) · [Backlog](todo.md) · [Security](security.md)
 
-These steps run the Expo starter in [`apps/mobile`](apps/mobile). Web is the fastest target to verify. The starter needs no environment file, database, cloud account, or device credentials.
+These steps run the public homepage on web and in the native Home tab in [`apps/mobile`](apps/mobile). The homepage needs no environment file, database, cloud account, or device credentials.
 
 ## Prerequisites
 
@@ -23,7 +23,9 @@ pnpm install --frozen-lockfile
 pnpm web
 ```
 
-Open the URL printed in the terminal. Verify **Welcome to Expo** on the home screen and select **Explore**. Stop the dev server with Ctrl+C.
+Open the URL printed in the terminal. Verify that the MediShield AI homepage displays the synthetic ward dashboard. Try the theme selector and FAQ. Open Log In and Register Hospital from the homepage, then follow Forgot password? from the sign-in page. Use sample values to check validation and the prototype submission messages. Use `/explore` to check the starter Explore route. Stop the dev server with Ctrl+C.
+
+On Android or iOS, open the **Home** tab to see the same project content in a native layout. The native homepage follows your device theme. If an existing development session still shows the Expo welcome screen, reload the app after restarting Metro with `pnpm start --clear`.
 
 | Command | Purpose |
 | --- | --- |
@@ -37,6 +39,12 @@ To verify web bundling, run `pnpm --filter @medishield/mobile exec expo export -
 
 The starter includes [`reset-project`](apps/mobile/scripts/reset-project.js), which replaces the sample routes and can move or delete starter files inside `apps/mobile`. Normal development starts with the existing routes.
 
+## NativeWind and Tailwind
+
+The Expo workspace pins NativeWind 4.2.7 and Tailwind CSS 3.4.17. Metro reads the Tailwind directives from [`src/global.css`](apps/mobile/src/global.css). Style homepage components with utility classes. Shared theme and layout classes live in [`styles.ts`](apps/mobile/src/features/home/styles.ts), and [`tailwind.config.js`](apps/mobile/tailwind.config.js) defines the semantic color utilities and web fonts.
+
+The [NativeWind compatibility patch](patches/react-native-css-interop@0.2.7.patch) removes the automatic registration of React Native's deprecated `ImageBackground`. Run `node --test apps/mobile/tests/nativewind-interop.test.cjs` from the root to verify the remaining image and view registrations. Restart Expo with `pnpm web --clear` after changing Tailwind, Babel, or Metro configuration.
+
 ## Verification baseline
 
 The workspace migration was checked with Node.js 24.18.0 and pnpm 11.13.0.
@@ -47,7 +55,7 @@ The workspace migration was checked with Node.js 24.18.0 and pnpm 11.13.0.
 | Web start | The root `pnpm web` command served `/` and `/explore` with HTTP 200. |
 | Web export | The client and server bundles built from `apps/mobile`. |
 | Native configuration | Expo loaded the Android and iOS prebuild config. Device and emulator runs are pending. |
-| TypeScript | TS2322 remains in [`app-tabs.web.tsx`](apps/mobile/src/components/app-tabs.web.tsx#L38) because of incompatible ref types. |
+| TypeScript | The homepage update resolved the web tab ref mismatch. The TypeScript check passes. |
 
 ## Troubleshooting
 

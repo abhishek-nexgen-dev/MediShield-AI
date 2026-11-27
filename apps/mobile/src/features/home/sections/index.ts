@@ -1,0 +1,9 @@
+export { AboutSection } from './AboutSection';
+export { ProblemSection } from './ProblemSection';
+export { FeaturesSection } from './FeaturesSection';
+export { HowItWorksSection } from './HowItWorksSection';
+export { SolutionsSection } from './SolutionsSection';
+export { BenefitsSection } from './BenefitsSection';
+export { FAQSection } from './FAQSection';
+export { CTASection } from './CTASection';
+export { Footer } from './Footer';
